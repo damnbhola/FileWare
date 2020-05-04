@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block nav %}
+  <h1><a href="{% url 'home' %}">FileWare</a></h1>
+{% endblock %}
+
+
+{% block content %}
+<!--  <script src="{% static 'js/app.js' %}"></script>-->
+  <h2 id="file_name">{{ file.file_name }}</h2>
+  <p><a href="{{ file.file.url }}">Download ZIP File</a></p>
+{% endblock %}

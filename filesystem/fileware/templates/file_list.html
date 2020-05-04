@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block nav %}
+      <h1><a href="{% url 'home' %}">FileWare</a></h1>
+{% endblock %}
+
+{% block content %}
+  {% if url %}
+    <p>Uploaded file: <a href="{{ url }}">{{ url }}</a></p>
+  {% endif %}
+  <table class="table mb-0">
+    <thead>
+      <tr>
+        <th>S.NO.</th>
+        <th>File Name</th>
+        <th>Upload Date</th>
+        <th>Download</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for file in files %}
+        <tr>
+          <td>{{ file.id }}</td>
+          <td>{{ file.file_name }}</td>
+          <td>{{ file.up_date }}</td>
+          <td>
+            <a href="{{ file.file.url }}" class="btn btn-primary btn-sm">
+              Download ZIP
+            </a>
+          </td>
+          <td>
+            <form method="post" action="{% url 'delete_file' file.pk %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
